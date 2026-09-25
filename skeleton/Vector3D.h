@@ -18,7 +18,7 @@ public:
 	Vector3D operator =(Vector3D& other);
 	Vector3D operator +(Vector3D& other);
 	Vector3D operator -(Vector3D& other);
-	Vector3D operator *(float& val);
+	Vector3D operator *(float val);
 	Vector3D operator +=(Vector3D& other);
 
 	operator physx::PxVec3() const {
