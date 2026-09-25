@@ -13,6 +13,7 @@ public:
 	void keyPress(unsigned char key, const physx::PxTransform& camera) override;
 	void cleanup() override;
 
+	void setColorByDot(RenderItem*& renderItem, physx::PxShape* esfera, physx::PxTransform* transform, double dot);
 
 private:
 	physx::PxTransform m_transform;
@@ -24,5 +25,14 @@ private:
 	RenderItem* m_renderItem2{ nullptr };
 	physx::PxTransform m_transform3;
 	RenderItem* m_renderItem3{ nullptr };
+
+	physx::PxTransform m_transformP1;
+	RenderItem* m_renderItemP1{ nullptr };
+	physx::PxTransform m_transformP2;
+	RenderItem* m_renderItemP2{ nullptr };
+	physx::PxTransform m_transformP3;
+	RenderItem* m_renderItemP3{ nullptr };
+	physx::PxTransform m_transformP4;
+	RenderItem* m_renderItemP4{ nullptr };
 };
 
