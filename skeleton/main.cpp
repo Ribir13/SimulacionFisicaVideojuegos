@@ -24,6 +24,8 @@
 #include "EmptyScene.h"
 #include "Scene0.h"
 
+#include "Particle.h"
+
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
 
@@ -54,6 +56,7 @@ ContactReportCallback gContactReportCallback;
 double gPhysicsTimeAccumulator = 0.0;
 const double gFixedTimestep = 1.0 / 60.0;
 
+Particle* particle = nullptr; //PRACTICA 1
 
 void initPhysics(bool interactive)
 {
@@ -104,6 +107,7 @@ void initPhysics(bool interactive)
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");
 
+	particle = new Particle(Vector3D(0, 0, 0), Vector3D(15, 60, 0), Vector3D(0, -75, 0));
 }
 
 
@@ -131,6 +135,9 @@ void stepPhysics(bool interactive, double t)
 
 		gPhysicsTimeAccumulator -= gFixedTimestep;
 	}
+
+	if (particle) particle->integrate(t);
+
 	SceneManager::instance().update(t);
 }
 
@@ -178,6 +185,11 @@ void cleanupPhysics(bool interactive)
 		gFoundation->release();
 		gFoundation = nullptr;
 	}
+
+	if (particle) {
+		delete particle;
+		particle = nullptr;
+	}
 }
 
 // Function called when a key is pressed
@@ -209,6 +221,5 @@ int main(int, const char* const*)
 		stepPhysics(false);
 	cleanupPhysics(false);
 #endif
-
 	return 0;
 }
