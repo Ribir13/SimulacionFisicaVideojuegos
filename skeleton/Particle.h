@@ -7,7 +7,7 @@
 class Particle
 {
 public:
-	Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc);
+	Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp);
 	~Particle();
 
 	void integrate(double t);
@@ -17,5 +17,7 @@ private:
 	Vector3D vel;
 	physx::PxTransform pose;
 	RenderItem* renderItem;
+
+	float damp;
 };
 
