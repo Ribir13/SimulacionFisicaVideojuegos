@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "vector"
 
 class Scene0: public Scene
 {
@@ -34,5 +35,7 @@ private:
 	RenderItem* m_renderItemP3{ nullptr };
 	physx::PxTransform m_transformP4;
 	RenderItem* m_renderItemP4{ nullptr };
+
+	std::vector<RenderItem*> m_renderItemsC;
 };
 

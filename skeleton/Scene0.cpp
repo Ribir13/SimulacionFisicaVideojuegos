@@ -37,35 +37,51 @@ void Scene0::init() {
 
     //Reto B)
 
-    Vector3D d = Vector3D(0.0, 0.0, 1.0);
+    //Vector3D d = Vector3D(0.0, 0.0, 1.0);
 
-    Vector3D P_1 = Vector3D(2.0, 0.0, 3.0);
-    Vector3D P_2 = Vector3D(-4.0, 0.0, 1.0);
-    Vector3D P_3 = Vector3D(0.0, 0.0, -5.0);
-    Vector3D P_4 = Vector3D(3.0, 0.0, 0.0);
+    //Vector3D P_1 = Vector3D(2.0, 0.0, 3.0);
+    //Vector3D P_2 = Vector3D(-4.0, 0.0, 1.0);
+    //Vector3D P_3 = Vector3D(0.0, 0.0, -5.0);
+    //Vector3D P_4 = Vector3D(3.0, 0.0, 0.0);
 
-    physx::PxShape* esferaP1 = CreateShape(physx::PxSphereGeometry(2.0f));
-    m_transformP1 = physx::PxTransform(P_1.operator physx::PxVec3());
-    physx::PxShape* esferaP2 = CreateShape(physx::PxSphereGeometry(2.0f));
-    m_transformP2 = physx::PxTransform(P_2.operator physx::PxVec3());
-    physx::PxShape* esferaP3 = CreateShape(physx::PxSphereGeometry(2.0f));
-    m_transformP3 = physx::PxTransform(P_3.operator physx::PxVec3());
-    physx::PxShape* esferaP4 = CreateShape(physx::PxSphereGeometry(2.0f));
-    m_transformP4 = physx::PxTransform(P_4.operator physx::PxVec3());
+    //physx::PxShape* esferaP1 = CreateShape(physx::PxSphereGeometry(2.0f));
+    //m_transformP1 = physx::PxTransform(P_1.operator physx::PxVec3());
+    //physx::PxShape* esferaP2 = CreateShape(physx::PxSphereGeometry(2.0f));
+    //m_transformP2 = physx::PxTransform(P_2.operator physx::PxVec3());
+    //physx::PxShape* esferaP3 = CreateShape(physx::PxSphereGeometry(2.0f));
+    //m_transformP3 = physx::PxTransform(P_3.operator physx::PxVec3());
+    //physx::PxShape* esferaP4 = CreateShape(physx::PxSphereGeometry(2.0f));
+    //m_transformP4 = physx::PxTransform(P_4.operator physx::PxVec3());
 
-    double dot1 = d.dot(P_1);
-    setColorByDot(m_renderItemP1, esferaP1, &m_transformP1, dot1);
+    //double dot1 = d.dot(P_1);
+    //setColorByDot(m_renderItemP1, esferaP1, &m_transformP1, dot1);
 
-    double dot2 = d.dot(P_2);
-    setColorByDot(m_renderItemP2, esferaP2, &m_transformP2, dot2);
+    //double dot2 = d.dot(P_2);
+    //setColorByDot(m_renderItemP2, esferaP2, &m_transformP2, dot2);
 
-    double dot3 = d.dot(P_3);
-    setColorByDot(m_renderItemP3, esferaP3, &m_transformP3, dot3);
+    //double dot3 = d.dot(P_3);
+    //setColorByDot(m_renderItemP3, esferaP3, &m_transformP3, dot3);
 
-    double dot4 = d.dot(P_4);
-    setColorByDot(m_renderItemP4, esferaP4, &m_transformP4, dot4);
+    //double dot4 = d.dot(P_4);
+    //setColorByDot(m_renderItemP4, esferaP4, &m_transformP4, dot4);
 
+    //Reto C)
+    Vector3D A = Vector3D(-8.0, 1.0, -8.0);
+    Vector3D B = Vector3D(8.0, 8.0, 8.0);
+    
+    for (int i = 1; i <= 10; i++)
+    {
+        float t = (i) / 11.0f;
 
+        Vector3D P = A + (B - A) * t;
+
+        physx::PxShape* sp = CreateShape(physx::PxSphereGeometry(0.5f));
+        physx::PxTransform* transform = new physx::PxTransform(P.operator physx::PxVec3());
+
+        RenderItem* renderItem = new RenderItem(sp, transform, Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+
+        m_renderItemsC.push_back(renderItem);
+    }
 }
 
 void Scene0::update(double dt) {
@@ -110,6 +126,12 @@ void Scene0::cleanup() {
         m_renderItemP4->release(); // Deregistra y destruye el item
         m_renderItemP4 = nullptr;
     }
+
+    for (RenderItem* renderItem : m_renderItemsC)
+    {
+        if (renderItem) renderItem->release();
+    }
+    m_renderItemsC.clear();
 }
 
 void Scene0::setColorByDot(RenderItem*& renderItem, physx::PxShape* esfera, physx::PxTransform* transform, double dot)
