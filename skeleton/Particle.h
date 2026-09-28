@@ -11,12 +11,15 @@ public:
 	~Particle();
 
 	void integrate(double t);
+	void integrateSemi(double t);
 
 private:
 	Vector3D acc;
 	Vector3D vel;
 	physx::PxTransform pose;
 	RenderItem* renderItem;
+
+	Vector3D prevPos;
 
 	float damp;
 };
