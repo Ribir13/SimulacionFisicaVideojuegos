@@ -22,5 +22,7 @@ private:
 	Vector3D prevPos;
 
 	float damp;
+
+	const double gFixedTimestep = 1.0 / 60.0;
 };
 
