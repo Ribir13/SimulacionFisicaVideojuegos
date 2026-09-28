@@ -8,9 +8,11 @@ Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp) {
     acc = Acc;
     damp = Damp;
 
+    Vector3D initialVel = (vel + acc * gFixedTimestep) * pow(damp, gFixedTimestep);
+    prevPos = Pos - initialVel * gFixedTimestep;
+
     physx::PxShape* esfera = CreateShape(physx::PxSphereGeometry(2.0f));
     renderItem = new RenderItem(esfera, &pose, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
-    prevPos = Pos - Vel * gFixedTimestep;
 }
 
 Particle::~Particle() {
