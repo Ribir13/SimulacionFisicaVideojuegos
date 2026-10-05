@@ -17,6 +17,6 @@ private:
 	float simSpeed;
 	float realGravity;
 
-	void updateSimulationParameters();
+	void updateParam();
 };
 

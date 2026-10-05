@@ -4,17 +4,24 @@
 #include <iostream>
 
 void Scene1::init() {
-   
+    gPhysicsTimeAccumulator = 0.0;
 }
-
-void Scene1::update(double dt) {
+void Scene1::update(double dt)
+{
     // Lógica/Integración del alumno (por ejemplo, movimiento simple)
     //m_transform.p.y -= static_cast<float>(9.8 * dt);
+    gPhysicsTimeAccumulator += dt;
 
-    for (auto* proj : m_projectiles) {
-        if (proj) {
-            proj->integrate(dt);
+    while (gPhysicsTimeAccumulator >= gFixedTimestep)
+    {
+        for (auto* proj : m_projectiles)
+        {
+            if (proj)
+            {
+                proj->integrate(gFixedTimestep);
+            }
         }
+        gPhysicsTimeAccumulator -= gFixedTimestep;
     }
 }
 
@@ -44,7 +51,7 @@ void Scene1::keyPress(unsigned char key, const physx::PxTransform& camera) {
         }
         case 'c':
         {
-            for (auto* proj : m_projectiles) if (proj) proj->changeGrav(5000f);
+            for (auto* proj : m_projectiles) if (proj) proj->changeGrav(5000.0f);
             break;
         }
     }
