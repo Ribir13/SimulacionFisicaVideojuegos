@@ -23,8 +23,7 @@
 #include "SceneManager.h"
 #include "EmptyScene.h"
 #include "Scene0.h"
-
-#include "Particle.h"
+#include "Scene1.h"
 
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
@@ -55,8 +54,6 @@ ContactReportCallback gContactReportCallback;
 // Global variables for physics timing. We use a fixed timestep for physics simulation, and accumulate time to determine when to step the physics simulation.
 double gPhysicsTimeAccumulator = 0.0;
 const double gFixedTimestep = 1.0 / 60.0;
-
-Particle* particle = nullptr; //PRACTICA 1
 
 void initPhysics(bool interactive)
 {
@@ -103,11 +100,10 @@ void initPhysics(bool interactive)
 	// Registrar las prácticas/escenas del curso
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
 	SceneManager::instance().registerScene<Scene0>("Scene0");
+	SceneManager::instance().registerScene<Scene1>("Scene1");
 
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");
-
-	particle = new Particle(Vector3D(0, 0, 0), Vector3D(15, 70, 0), Vector3D(0, -60, 0), 0.8);
 }
 
 
@@ -134,8 +130,6 @@ void stepPhysics(bool interactive, double t)
 		gScene->fetchResults(true);
 
 		gPhysicsTimeAccumulator -= gFixedTimestep;
-
-		if (particle) particle->integrate(gFixedTimestep);
 	}
 
 	SceneManager::instance().update(t);
@@ -185,11 +179,6 @@ void cleanupPhysics(bool interactive)
 		gFoundation->release();
 		gFoundation = nullptr;
 	}
-
-	if (particle) {
-		delete particle;
-		particle = nullptr;
-	}
 }
 
 // Function called when a key is pressed
@@ -198,6 +187,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	PX_UNUSED(camera);
 	if (key == '0') {
 		SceneManager::instance().changeScene("Scene0");
+	}
+	else if (key == '1') {
+		SceneManager::instance().changeScene("Scene1");
 	}
 	SceneManager::instance().keyPress(key, camera);
 }

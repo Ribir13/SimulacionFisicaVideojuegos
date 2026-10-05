@@ -7,22 +7,23 @@
 class Particle
 {
 public:
-	Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp);
+	Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp);
 	~Particle();
 
 	void integrate(double t);
 	void integrateSemi(double t);
 
-private:
+protected:
+	float mass;
+	float gravity;
 	Vector3D acc;
 	Vector3D vel;
 	physx::PxTransform pose;
 	RenderItem* renderItem;
 
 	Vector3D prevPos;
+	bool pp = false;
 
 	float damp;
-
-	const double gFixedTimestep = 1.0 / 60.0;
 };
 

@@ -4,6 +4,8 @@
 #include "PxPhysicsAPI.h"
 #include "PxPhysics.h"
 #include "RenderUtils.hpp"
+#include "Particle.h"
+#include "Projectile.h"
 
 // Clase base para las distintas escenas de la aplicación.
 // Provee la interfaz mínima que debe implementar cualquier escena:
