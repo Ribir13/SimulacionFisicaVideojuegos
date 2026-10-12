@@ -7,11 +7,14 @@
 class Particle
 {
 public:
-	Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp);
+	Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time = 5);
 	~Particle();
 
 	void integrate(double t);
 	void integrateSemi(double t);
+
+	bool isDead();
+	void updateLife(double dt);
 
 protected:
 	float mass;
@@ -25,5 +28,9 @@ protected:
 	bool pp = false;
 
 	float damp;
+
+	float timeToLive;
+
+	float spawnAccumulator = 0.0f;
 };
 

@@ -24,6 +24,7 @@
 #include "EmptyScene.h"
 #include "Scene0.h"
 #include "Scene1.h"
+#include "Scene2.h"
 
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
@@ -101,6 +102,7 @@ void initPhysics(bool interactive)
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
 	SceneManager::instance().registerScene<Scene0>("Scene0");
 	SceneManager::instance().registerScene<Scene1>("Scene1");
+	SceneManager::instance().registerScene<Scene2>("Scene2");
 
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");
@@ -190,6 +192,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	else if (key == '1') {
 		SceneManager::instance().changeScene("Scene1");
+	}
+	else if (key == '2') {
+		SceneManager::instance().changeScene("Scene2");
 	}
 	SceneManager::instance().keyPress(key, camera);
 }

@@ -2,21 +2,24 @@
 
 #include <cmath>
 
-Particle::Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp) {
+Particle::Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time) {
     pose = physx::PxTransform(Pos.operator physx::PxVec3());
     mass = Mass;
     gravity = Gravity;
     vel = Vel;
     acc = Acc;
     damp = Damp;
+    timeToLive = Time;
 
     physx::PxShape* esfera = CreateShape(physx::PxSphereGeometry(2.0f));
     renderItem = new RenderItem(esfera, &pose, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 }
 
 Particle::~Particle() {
-    delete renderItem;
-    renderItem = nullptr;
+    if (renderItem != nullptr) {
+        renderItem->release();
+        renderItem = nullptr;
+    }
 }
 
 void Particle::integrateSemi(double t)
@@ -26,9 +29,7 @@ void Particle::integrateSemi(double t)
 
     Vector3D gravityAcc(0.0f, gravity, 0.0f);
 
-    Vector3D actualAcc = acc + gravityAcc;
-
-    vel = (vel + actualAcc * t) * pow(damp, t);
+    vel = (vel + (acc + gravityAcc) * t) * pow(damp, t);
 
     pose.p = pose.p + vel.operator physx::PxVec3() * t;
 
@@ -44,12 +45,19 @@ void Particle::integrate(double t)
         Vector3D currPos = pose.p;
 
         Vector3D gravityAcc(0.0f, gravity, 0.0f);
-        Vector3D actualAcc = acc + gravityAcc;
 
-        pose.p = pose.p * 2.0 - prevPos + actualAcc * pow(t, 2);
+        pose.p = pose.p * 2.0 - prevPos + (acc + gravityAcc) * pow(t, 2);
         prevPos = currPos;
     }
 }
 
-//getCamera Camera 1cam = getCamera()
+//(notas) getCamera Camera 1cam = getCamera()
 // getDic() devuelve el vetor direccion de la camara, ha que normmalizarlo.
+
+bool Particle::isDead() {
+    return timeToLive <= 0.0f;
+}
+
+void Particle::updateLife(double dt) {
+    timeToLive -= static_cast<float>(dt);
+}

@@ -5,6 +5,7 @@
 #include "PxPhysics.h"
 #include "RenderUtils.hpp"
 #include "Particle.h"
+#include "ParticleSystem.h"
 #include "Projectile.h"
 
 // Clase base para las distintas escenas de la aplicación.
