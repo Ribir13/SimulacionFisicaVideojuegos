@@ -6,7 +6,7 @@
 void Scene2::init() {
     gPhysicsTimeAccumulator = 0.0;
 
-    m_ps = new ParticleSystem(0.1f, Vector3D(0.0f,0.0f,0.0f), Vector3D(1.0f, 1.0f, 1.0f), Vector3D(0.0f, 0.0f, 0.0f), 5.0f);
+    m_ps = new ParticleSystem(0.025f, Vector3D(25.0f,40.0f,0.0f), Vector3D(0.0f, 0.0f, 0.0f), 5.0f);
 
 }
 void Scene2::update(double dt)

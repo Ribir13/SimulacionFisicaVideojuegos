@@ -3,10 +3,10 @@
 #include <cmath>
 #include <iostream>
 
-ParticleSystem::ParticleSystem(float SpawnTime, Vector3D Vel, Vector3D Dir, Vector3D Pos, float LifeTime,
+ParticleSystem::ParticleSystem(float SpawnTime, Vector3D Vel, Vector3D Pos, float LifeTime,
     TYPE type, float Spread, float Radius) :
-    spawnTime(SpawnTime), vel(Vel), dir(Dir.normalize()), pos(Pos), lifeTime(LifeTime),
-     type(type), spread(spread), radius(radius), m_engine(std::random_device{}()), distribution(0.0f, 1.0f) {
+    spawnTime(SpawnTime), vel(Vel), pos(Pos), lifeTime(LifeTime),
+     type(type), spread(Spread), radius(Radius), m_engine(std::random_device{}()), distribution(0.0f, 1.0f) {
 
 }
 
