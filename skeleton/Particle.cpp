@@ -12,7 +12,7 @@ Particle::Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector
     timeToLive = Time;
 
     physx::PxShape* esfera = CreateShape(physx::PxSphereGeometry(2.0f));
-    renderItem = new RenderItem(esfera, &pose, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
+    renderItem = new RenderItem(esfera, &pose, Vector4(0.0f, 0.0f, 0.0f, 1.0f));
 }
 
 Particle::~Particle() {
