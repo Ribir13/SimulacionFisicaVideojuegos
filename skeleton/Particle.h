@@ -7,7 +7,11 @@
 class Particle
 {
 public:
-	Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time = 5);
+	enum ParticleShape {
+		Sphere, Square
+	};
+	Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time = 5,
+		ParticleShape ps = ParticleShape::Sphere, Vector4 Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f), float Scale = 2.0f);
 	~Particle();
 
 	void integrate(double t);

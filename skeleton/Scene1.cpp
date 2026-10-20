@@ -31,7 +31,12 @@ void Scene1::keyPress(unsigned char key, const physx::PxTransform& camera) {
     switch (key) {
         case 'p':
         {
-            m_projectiles.push_back(new Projectile(20.0f, 250.0f, 50.0f, -450.8f, pos, dir, 0.98f));
+            m_projectiles.push_back(new Projectile(20.0f, 250.0f, 50.0f, -450.8f, pos, dir, 0.98f, 5.0f, Particle::ParticleShape::Sphere));
+            break;
+        }
+        case 'o':
+        {
+            m_projectiles.push_back(new Projectile(2.0f, 1000.0f, 1000.0f, -0.0f, pos, dir, 0.99f, 5.0f, Particle::ParticleShape::Sphere, Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.25f));
             break;
         }
         case 'x':

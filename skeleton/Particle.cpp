@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-Particle::Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time) {
+Particle::Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time, ParticleShape ps, Vector4 Color, float Scale) {
     pose = physx::PxTransform(Pos.operator physx::PxVec3());
     mass = Mass;
     gravity = Gravity;
@@ -11,8 +11,16 @@ Particle::Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector
     damp = Damp;
     timeToLive = Time;
 
-    physx::PxShape* esfera = CreateShape(physx::PxSphereGeometry(2.0f));
-    renderItem = new RenderItem(esfera, &pose, Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+    physx::PxShape* shape;
+
+    if (ps == ParticleShape::Sphere) {
+        shape = CreateShape(physx::PxSphereGeometry(Scale));
+    }
+    else if (ps == ParticleShape::Square) {
+        shape = CreateShape(physx::PxBoxGeometry(Scale, Scale, Scale));
+    }
+
+    renderItem = new RenderItem(shape, &pose, Color);
 }
 
 Particle::~Particle() {
