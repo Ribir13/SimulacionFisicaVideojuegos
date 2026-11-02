@@ -31,12 +31,17 @@ void Scene1::keyPress(unsigned char key, const physx::PxTransform& camera) {
     switch (key) {
         case 'p':
         {
-            m_projectiles.push_back(new Projectile(20.0f, 250.0f, 50.0f, -450.8f, pos, dir, 0.98f, 5.0f, Particle::ParticleShape::Sphere));
+            m_projectiles.push_back(new Projectile(20.0f, 250.0f, 100.0f, -600.8f, pos, dir, 0.98f, 5.0f, Particle::ParticleShape::Sphere));
             break;
         }
         case 'o':
         {
             m_projectiles.push_back(new Projectile(2.0f, 1000.0f, 1000.0f, -0.0f, pos, dir, 0.99f, 5.0f, Particle::ParticleShape::Sphere, Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.25f));
+            break;
+        }
+        case 'i':
+        {
+            m_projectiles.push_back(new Projectile(40.0f, 250, 60.0f, 400.0f, pos, dir, 0.7f, 5.0f, Particle::ParticleShape::Square, Vector4(1.0f, 0.0f, 1.0f, 1.0f), 3.0f));
             break;
         }
         case 'x':
@@ -48,7 +53,7 @@ void Scene1::keyPress(unsigned char key, const physx::PxTransform& camera) {
         {
             for (auto* proj : m_projectiles) if (proj) proj->changeMass(50.0f);
             break;
-        }
+        }   
         case 'v':
         {
             for (auto* proj : m_projectiles) if (proj) proj->changeGrav(-5000.0f);

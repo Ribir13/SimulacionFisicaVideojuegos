@@ -6,8 +6,8 @@
 ParticleGenerator::ParticleGenerator(float SpawnTime, Vector3D Vel, Vector3D Pos, float LifeTime,
     TYPE type, float Spread, float Radius) :
     spawnTime(SpawnTime), vel(Vel), pos(Pos), lifeTime(LifeTime),
-     type(type), spread(Spread), radius(Radius), m_engine(std::random_device{}()), distribution(0.0f, 1.0f) {
-
+     type(type), spread(Spread), radius(Radius), m_engine(std::random_device{}()), uniformDist(-1.0f, 1.0f), gaussDist(0.0f, 1.0f) {
+    typedist = TYPEDIST::GAUSS;
 }
 
 ParticleGenerator::~ParticleGenerator() {
@@ -45,9 +45,9 @@ void ParticleGenerator::newParticle() {
     Vector3D pPos = pos;
     Vector3D pVel = vel;
 
-    float x = distribution(m_engine);
-    float y = distribution(m_engine);
-    float z = distribution(m_engine);
+    float x = randVal(-1.0f, 1.0f);
+    float y = randVal(-1.0f, 1.0f);
+    float z = randVal(-1.0f, 1.0f);
 
     switch (type) {
     case POINT:
@@ -61,4 +61,14 @@ void ParticleGenerator::newParticle() {
 
     Particle* p = new Particle(1.0f, -10.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime);
     particles.push_back(p);
+}
+
+float ParticleGenerator::randVal(float min, float max) {
+    switch (typedist) {
+    case UNI:
+        return uniformDist(m_engine);
+
+    case GAUSS:
+        return gaussDist(m_engine);
+    }
 }
