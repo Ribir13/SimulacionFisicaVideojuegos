@@ -10,12 +10,18 @@ ParticleSystem::~ParticleSystem() {
         delete p;
     }
     partGens.clear();
+
+
+    for (auto* f : forceGens) {
+        delete f;
+    }
+    forceGens.clear();
 }
 
 void ParticleSystem::update(double dt) {
     for (auto it = partGens.begin(); it != partGens.end(); ++it) {
         ParticleGenerator* p = *it;
-        p->update(dt);
+        p->update(dt, forceGens);
     }
 }
 
@@ -24,4 +30,9 @@ void ParticleSystem::addGen(float SpawnTime, Vector3D Vel, Vector3D Pos, float L
     ParticleGenerator* pg = new ParticleGenerator(SpawnTime, Vel, Pos, LifeTime, type, Spread, Radius);
 
     partGens.push_back(pg);
+}
+
+void ParticleSystem::addGravGen(float GR) {
+    ForceGravity* fg = new ForceGravity(GR);
+    forceGens.push_back(fg);
 }

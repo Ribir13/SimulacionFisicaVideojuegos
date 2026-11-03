@@ -3,6 +3,7 @@
 #include "Particle.h"
 #include <vector>
 #include <random>
+#include "ForceGravity.h"
 
 class ParticleGenerator
 {
@@ -21,10 +22,13 @@ public:
         TYPE type = POINT, float Spread = 5.3f, float Radius = 1.0f); //variables opcionales para cone.
     ~ParticleGenerator();
 
-    void update(double dt);
+    void update(double dt, std::vector<ForceGenerator*>& forceGens);
     void newParticle();
     void setDist(TYPEDIST t) { typedist = t; };
+    void applyForces(std::vector<ForceGenerator*>& forceGens, double dt);
+    void integrateParticles(double dt);
 
+    std::vector<Particle*>& getParticles() { return particles; }
 private:
     std::vector<Particle*> particles;
 

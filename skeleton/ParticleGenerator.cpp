@@ -17,7 +17,7 @@ ParticleGenerator::~ParticleGenerator() {
     particles.clear();
 }
 
-void ParticleGenerator::update(double dt) {
+void ParticleGenerator::update(double dt, std::vector<ForceGenerator*>& forceGens) {
     timer += static_cast<float>(dt);
 
     if (timer >= spawnTime) {
@@ -28,6 +28,10 @@ void ParticleGenerator::update(double dt) {
     for (auto it = particles.begin(); it != particles.end(); ) {
         Particle* p = *it;
 
+        p->resetForce();
+        for (auto* fg : forceGens) {
+            fg->updateForce(p, dt);
+        }
         p->integrateSemi(dt);
         p->updateLife(dt);
 
@@ -59,7 +63,7 @@ void ParticleGenerator::newParticle() {
         break;
     }
 
-    Particle* p = new Particle(1.0f, -10.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime);
+    Particle* p = new Particle(1.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime);
     particles.push_back(p);
 }
 

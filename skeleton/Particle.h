@@ -10,7 +10,7 @@ public:
 	enum ParticleShape {
 		Sphere, Square
 	};
-	Particle(float Mass, float Gravity, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time = 5,
+	Particle(float Mass, Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damp, float Time = 5,
 		ParticleShape ps = ParticleShape::Sphere, Vector4 Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f), float Scale = 2.0f);
 	~Particle();
 
@@ -20,9 +20,11 @@ public:
 	bool isDead();
 	void updateLife(double dt);
 
+	void addForce(Vector3D force);
+	void resetForce();
+
 protected:
 	float mass;
-	float gravity;
 	Vector3D acc;
 	Vector3D vel;
 	physx::PxTransform pose;

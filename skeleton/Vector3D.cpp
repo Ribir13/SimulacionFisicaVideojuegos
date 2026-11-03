@@ -41,6 +41,10 @@ Vector3D Vector3D::operator *(float val) {
 	return Vector3D(x * val, y * val, z * val);
 }
 
+Vector3D Vector3D::operator /(float val) {
+	return Vector3D(x / val, y / val, z / val);
+}
+
 Vector3D Vector3D::operator +=(Vector3D& other) {
 	x += other.x;
 	y += other.y;

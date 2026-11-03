@@ -2,6 +2,8 @@
 
 #include "Scene.h"
 #include "vector"
+#include "ForceGenerator.h"
+#include "ForceGravity.h"
 
 class Scene1 : public Scene
 {
@@ -22,5 +24,7 @@ private:
 	// Global variables for physics timing. We use a fixed timestep for physics simulation, and accumulate time to determine when to step the physics simulation.
 	double gPhysicsTimeAccumulator = 0.0;
 	const double gFixedTimestep = 1.0 / 60.0;
+
+	ForceGravity* grav;
 };
 
