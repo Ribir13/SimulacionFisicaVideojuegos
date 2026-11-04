@@ -22,10 +22,10 @@ public:
         TYPE type = POINT, float Spread = 5.3f, float Radius = 1.0f); //variables opcionales para cone.
     ~ParticleGenerator();
 
-    void update(double dt, std::vector<ForceGenerator*>& forceGens);
+    void update(double dt);
     void newParticle();
     void setDist(TYPEDIST t) { typedist = t; };
-    void applyForces(std::vector<ForceGenerator*>& forceGens, double dt);
+    void addForceGenerator(ForceGenerator* fg) {forceGens.push_back(fg);}
     void integrateParticles(double dt);
 
     std::vector<Particle*>& getParticles() { return particles; }
@@ -49,4 +49,6 @@ private:
     std::normal_distribution<float> gaussDist;
 
     float randVal(float min, float max);
+
+    std::vector<ForceGenerator*> forceGens;
 };

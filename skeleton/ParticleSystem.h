@@ -13,10 +13,11 @@ public:
 	void update(double dt);
 	
 
-	void addGen(float SpawnTime, Vector3D Vel, Vector3D Pos, float LifeTime,
+	ParticleGenerator* addGen(float SpawnTime, Vector3D Vel, Vector3D Pos, float LifeTime,
 		ParticleGenerator::TYPE type = ParticleGenerator::POINT, float Spread = 5.3f, float Radius = 1.0f);
 
-	void addGravGen(float GR);
+	void addGravGen(float GR, ParticleGenerator* pg);
+	void addGravGenToAll(float GR, ParticleGenerator* pg);
 private:
 	std::vector<ParticleGenerator*> partGens;
 	std::vector<ForceGenerator*> forceGens;

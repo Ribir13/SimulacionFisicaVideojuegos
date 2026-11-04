@@ -8,10 +8,11 @@ void Scene2::init() {
 
     m_ps = new ParticleSystem();
 
-    m_ps->addGravGen(-20.0f);
+    ParticleGenerator* ps = m_ps->addGen(0.01f, Vector3D(10.0f, 60.0f, 10.0f), Vector3D(0.0f, 0.0f, 0.0f), 5.0f);
 
-    m_ps->addGen(0.01f, Vector3D(10.0f, 60.0f, 10.0f), Vector3D(0.0f, 0.0f, 0.0f), 5.0f);
+    m_ps->addGravGen(-20.0f, ps);
 }
+
 void Scene2::update(double dt)
 {
     // Lógica/Integración del alumno (por ejemplo, movimiento simple)

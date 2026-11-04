@@ -15,9 +15,10 @@ ParticleGenerator::~ParticleGenerator() {
         delete p;
     }
     particles.clear();
+    forceGens.clear();
 }
 
-void ParticleGenerator::update(double dt, std::vector<ForceGenerator*>& forceGens) {
+void ParticleGenerator::update(double dt) {
     timer += static_cast<float>(dt);
 
     if (timer >= spawnTime) {

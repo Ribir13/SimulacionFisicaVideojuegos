@@ -6,6 +6,7 @@
 void Scene1::init() {
     gPhysicsTimeAccumulator = 0.0;
     grav = new ForceGravity(-40.0f);
+    gravUp = new ForceGravity(60.0f);
 }
 void Scene1::update(double dt)
 {
@@ -24,6 +25,16 @@ void Scene1::update(double dt)
                 proj->integrate(gFixedTimestep);
             }
         }
+        for (auto* proj : m_projectiles2)
+        {
+            if (proj)
+            {
+                proj->resetForce();
+                grav->updateForce(proj, gFixedTimestep);
+                gravUp->updateForce(proj, gFixedTimestep);
+                proj->integrate(gFixedTimestep);
+            }
+        }
         gPhysicsTimeAccumulator -= gFixedTimestep;
     }
 }
@@ -32,40 +43,43 @@ void Scene1::keyPress(unsigned char key, const physx::PxTransform& camera) {
     Vector3D pos = camera.p;
     Vector3D dir = Vector3D(camera.q.rotate(physx::PxVec3(0.0f, 0.0f, -1.0f)));
     switch (key) {
-        case 'p':
-        {
-            m_projectiles.push_back(new Projectile(20.0f, 100.0f, 100.0f, pos, dir, 0.98f, 5.0f, Particle::ParticleShape::Sphere));
-            break;
-        }
-        case 'o':
-        {
-            m_projectiles.push_back(new Projectile(2.0f, 600.0f, 600.0f, pos, dir, 0.99f, 5.0f, Particle::ParticleShape::Sphere, Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.25f));
-            break;
-        }
-        case 'i':
-        {
-            m_projectiles.push_back(new Projectile(40.0f, 60.0f, 400.0f, pos, dir, 0.7f, 5.0f, Particle::ParticleShape::Square, Vector4(1.0f, 0.0f, 1.0f, 1.0f), 3.0f));
-            break;
-        }
-        case 'x':
-        {
-            for (auto* proj : m_projectiles) if (proj) proj->changeMass(-50.0f);
-            break;
-        }
-        case 'z':
-        {
-            for (auto* proj : m_projectiles) if (proj) proj->changeMass(50.0f);
-            break;
-        }
+    case 'p':
+    {
+        m_projectiles.push_back(new Projectile(20.0f, 100.0f, 100.0f, pos, dir, 0.98f, 5.0f, Particle::ParticleShape::Sphere));
+        break;
+    }
+    case 'o':
+    {
+        m_projectiles.push_back(new Projectile(2.0f, 600.0f, 600.0f, pos, dir, 0.99f, 5.0f, Particle::ParticleShape::Sphere, Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.25f));
+        break;
+    }
+    case 'i':
+    {
+        m_projectiles2.push_back(new Projectile(40.0f, 60.0f, 400.0f, pos, dir, 0.7f, 5.0f, Particle::ParticleShape::Square, Vector4(1.0f, 0.0f, 1.0f, 1.0f), 3.0f));
+        break;
+    }
+    case 'x':
+    {
+        for (auto* proj : m_projectiles) if (proj) proj->changeMass(-50.0f);
+        break;
+    }
+    case 'z':
+    {
+        for (auto* proj : m_projectiles) if (proj) proj->changeMass(50.0f);
+        break;
+    }
     }
 }
 
 void Scene1::cleanup() {
-
     for (auto* proj : m_projectiles) {
         delete proj;
     }
     m_projectiles.clear();
+    for (auto* proj : m_projectiles2) {
+        delete proj;
+    }
+    m_projectiles2.clear();
 }
 
 void Scene1::setColorByDot(RenderItem*& renderItem, physx::PxShape* esfera, physx::PxTransform* transform, double dot)

@@ -20,11 +20,13 @@ public:
 
 private:
 	std::vector<Projectile*> m_projectiles;
+	std::vector<Projectile*> m_projectiles2;
 
 	// Global variables for physics timing. We use a fixed timestep for physics simulation, and accumulate time to determine when to step the physics simulation.
 	double gPhysicsTimeAccumulator = 0.0;
 	const double gFixedTimestep = 1.0 / 60.0;
 
 	ForceGravity* grav;
+	ForceGravity* gravUp;
 };
 
