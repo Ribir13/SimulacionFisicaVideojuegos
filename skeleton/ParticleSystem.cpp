@@ -46,3 +46,12 @@ void ParticleSystem::addGravGenToAll(float GR) {
         (*it)->addForceGenerator(fg);
     }
 }
+
+void ParticleSystem::addWindGenToAll(Vector3D V1, Vector3D V2, Vector3D V3, Vector3D V, float K1)
+{
+    ForceWind* fw = new ForceWind(V1, V2, V3, V, K1);
+    forceGens.push_back(fw);
+    for (auto it = partGens.begin(); it != partGens.end(); it++){
+        (*it)->addForceGenerator(fw);
+    }
+}

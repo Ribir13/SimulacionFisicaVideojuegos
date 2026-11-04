@@ -25,6 +25,9 @@ public:
 
 	void custom(ParticleShape ps, Vector4 Color, float Scale = 2.0f);
 
+	Vector3D getPosition() { return Vector3D(pose.p); }
+	Vector3D getVelocity() { return vel; }
+
 protected:
 	float mass;
 	Vector3D acc;

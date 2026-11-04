@@ -9,10 +9,11 @@ void Scene2::init() {
     m_ps = new ParticleSystem();
 
     ParticleGenerator* ps = m_ps->addGen(0.01f, Vector3D(10.0f, 60.0f, 10.0f), Vector3D(-90.0f, -20.0f, -90.0f), 3.0f);
-    ParticleGenerator* ps2 = m_ps->addGen(0.01f, Vector3D(6.0f, 100.0f, 6.0f), Vector3D(-90.0f, -20.0f, -140.0f), 9.0f, ParticleGenerator::POINT, 2.0f);
+    ParticleGenerator* ps2 = m_ps->addGen(0.01f, Vector3D(6.0f, 60.0f, 6.0f), Vector3D(-90.0f, -20.0f, -140.0f), 15.0f, ParticleGenerator::POINT, 2.0f);
     ps2->custom(Particle::ParticleShape::Square, Vector4(2.0f, 0.0f, 0.0f, 1.0f));
     m_ps->addGravGenToAll(-20.0f);
     m_ps->addGravGen(40.0f, ps);
+    m_ps->addWindGenToAll(Vector3D(-10000, 40, -100000), Vector3D(1000, 40, 10000), Vector3D(0, 150, 0), Vector3D(2000, 0, 0), 0.5f);
 }
 
 void Scene2::update(double dt)
