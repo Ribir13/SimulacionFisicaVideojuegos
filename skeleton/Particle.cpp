@@ -70,3 +70,18 @@ void Particle::addForce(Vector3D force) {
 void Particle::resetForce() {
     acc = Vector3D(0.0f, 0.0f, 0.0f);
 }
+
+void Particle::custom(ParticleShape ps, Vector4 Color, float Scale)
+{
+    physx::PxShape* shape;
+    if (ps == ParticleShape::Sphere) {
+        shape = CreateShape(physx::PxSphereGeometry(Scale));
+    }
+    else if (ps == ParticleShape::Square) {
+        shape = CreateShape(physx::PxBoxGeometry(Scale, Scale, Scale));
+    }
+    shape->acquireReference();
+    renderItem->shape->release();
+    renderItem->shape = shape;
+    renderItem->color = Color;
+}

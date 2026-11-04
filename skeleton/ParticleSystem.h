@@ -17,7 +17,7 @@ public:
 		ParticleGenerator::TYPE type = ParticleGenerator::POINT, float Spread = 5.3f, float Radius = 1.0f);
 
 	void addGravGen(float GR, ParticleGenerator* pg);
-	void addGravGenToAll(float GR, ParticleGenerator* pg);
+	void addGravGenToAll(float GR);
 private:
 	std::vector<ParticleGenerator*> partGens;
 	std::vector<ForceGenerator*> forceGens;

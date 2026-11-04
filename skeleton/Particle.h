@@ -23,6 +23,8 @@ public:
 	void addForce(Vector3D force);
 	void resetForce();
 
+	void custom(ParticleShape ps, Vector4 Color, float Scale = 2.0f);
+
 protected:
 	float mass;
 	Vector3D acc;

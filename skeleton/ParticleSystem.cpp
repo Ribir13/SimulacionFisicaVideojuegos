@@ -39,7 +39,7 @@ void ParticleSystem::addGravGen(float GR, ParticleGenerator* pg) {
     pg->addForceGenerator(fg);
 }
 
-void ParticleSystem::addGravGenToAll(float GR, ParticleGenerator* pg) {
+void ParticleSystem::addGravGenToAll(float GR) {
     ForceGravity* fg = new ForceGravity(GR);
     forceGens.push_back(fg);
     for (auto it = partGens.begin(); it != partGens.end(); it++) {

@@ -28,7 +28,7 @@ public:
     void addForceGenerator(ForceGenerator* fg) {forceGens.push_back(fg);}
     void integrateParticles(double dt);
 
-    std::vector<Particle*>& getParticles() { return particles; }
+    void custom(Particle::ParticleShape Shape, Vector4 Color, float Scale = 2.0f);
 private:
     std::vector<Particle*> particles;
 
@@ -51,4 +51,8 @@ private:
     float randVal(float min, float max);
 
     std::vector<ForceGenerator*> forceGens;
+
+    Particle::ParticleShape shape = Particle::ParticleShape::Sphere;
+    Vector4 color = Vector4(1, 1, 1, 1);
+    float scale = 2.0f;
 };

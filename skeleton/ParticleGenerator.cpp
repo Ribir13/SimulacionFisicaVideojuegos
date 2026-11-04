@@ -64,7 +64,7 @@ void ParticleGenerator::newParticle() {
         break;
     }
 
-    Particle* p = new Particle(1.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime);
+    Particle* p = new Particle(1.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime, shape, color, scale);
     particles.push_back(p);
 }
 
@@ -76,4 +76,11 @@ float ParticleGenerator::randVal(float min, float max) {
     case GAUSS:
         return gaussDist(m_engine);
     }
+}
+
+void ParticleGenerator::custom(Particle::ParticleShape Shape, Vector4 Color, float Scale)
+{
+    shape = Shape;
+    color = Color;
+    scale = Scale;
 }
