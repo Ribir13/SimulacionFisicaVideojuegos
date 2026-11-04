@@ -4,6 +4,7 @@
 #include "ForceGenerator.h"
 #include "ForceGravity.h"
 #include "ForceWind.h"
+#include "ForceTornado.h"
 
 class ParticleSystem
 {
@@ -20,7 +21,8 @@ public:
 	void addGravGen(float GR, ParticleGenerator* pg);
 	void addGravGenToAll(float GR);
 
-	void addWindGenToAll(Vector3D V1, Vector3D V2, Vector3D V3, Vector3D V, float K1);
+	void addWindGenToAll(Vector3D Center, float Anc, float Alt, Vector3D V, float K1);
+	void addTornadoGenToAll(float K, Vector3D Center, float Anc, float Alt, float K1);
 private:
 	std::vector<ParticleGenerator*> partGens;
 	std::vector<ForceGenerator*> forceGens;

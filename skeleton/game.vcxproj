@@ -264,6 +264,7 @@
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="ForceGravity.cpp" />
+    <ClCompile Include="ForceTornado.cpp" />
     <ClCompile Include="ForceWind.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="EmptyScene.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="ForceGravity.h" />
+    <ClInclude Include="ForceTornado.h" />
     <ClInclude Include="ForceWind.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />

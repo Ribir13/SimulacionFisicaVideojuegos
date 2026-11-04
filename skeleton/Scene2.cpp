@@ -13,7 +13,8 @@ void Scene2::init() {
     ps2->custom(Particle::ParticleShape::Square, Vector4(2.0f, 0.0f, 0.0f, 1.0f));
     m_ps->addGravGenToAll(-20.0f);
     m_ps->addGravGen(40.0f, ps);
-    m_ps->addWindGenToAll(Vector3D(-10000, 40, -100000), Vector3D(1000, 40, 10000), Vector3D(0, 150, 0), Vector3D(2000, 0, 0), 0.5f);
+   // m_ps->addWindGenToAll(Vector3D(10, 20, 10), 100.0f, 90.0f, Vector3D(20, 0, 0), 0.5f);
+    m_ps->addTornadoGenToAll(9.0f, Vector3D(-90, 0, -90), 200.0f, 40000.0f, 1.0f);
 }
 
 void Scene2::update(double dt)
