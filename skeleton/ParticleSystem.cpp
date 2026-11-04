@@ -19,6 +19,9 @@ ParticleSystem::~ParticleSystem() {
 }
 
 void ParticleSystem::update(double dt) {
+    for (auto it = forceGens.begin(); it != forceGens.end(); ++it) {
+        (*it)->update(dt);
+    }
     for (auto it = partGens.begin(); it != partGens.end(); ++it) {
         ParticleGenerator* p = *it;
         p->update(dt);
@@ -59,6 +62,15 @@ void ParticleSystem::addWindGenToAll(Vector3D Center, float anc, float alt, Vect
 void ParticleSystem::addTornadoGenToAll(float K, Vector3D Center, float Anc, float Alt, float K1)
 {
     ForceTornado* ft = new ForceTornado(K, Center, Anc, Alt, K1);
+    forceGens.push_back(ft);
+    for (auto it = partGens.begin(); it != partGens.end(); it++) {
+        (*it)->addForceGenerator(ft);
+    }
+}
+
+void ParticleSystem::addExplGenToAll(Vector3D Center, float R, float K, float Dur)
+{
+    ForceExplosion* ft = new ForceExplosion(Center, R, K, Dur);
     forceGens.push_back(ft);
     for (auto it = partGens.begin(); it != partGens.end(); it++) {
         (*it)->addForceGenerator(ft);

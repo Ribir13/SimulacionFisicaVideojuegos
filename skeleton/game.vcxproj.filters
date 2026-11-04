@@ -24,6 +24,7 @@
     <ClCompile Include="ForceGravity.cpp" />
     <ClCompile Include="ForceWind.cpp" />
     <ClCompile Include="ForceTornado.cpp" />
+    <ClCompile Include="ForceExplosion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="ForceGravity.h" />
     <ClInclude Include="ForceWind.h" />
     <ClInclude Include="ForceTornado.h" />
+    <ClInclude Include="ForceExplosion.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
