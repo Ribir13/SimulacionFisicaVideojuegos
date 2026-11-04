@@ -5,9 +5,11 @@ ForceTornado::ForceTornado(float K, Vector3D Center, float Anc, float Alt, float
 }
 
 void ForceTornado::updateForce(Particle* p, double dt) {
-    Vector3D pos = p->getPosition();
-    if (inside(pos)) {
-        v = (Vector3D(-(pos.z - center.z), 50 - (pos.y - center.y), pos.x - center.x)) * k;
-        ForceWind::updateForce(p, dt);
+    if (active) {
+        Vector3D pos = p->getPosition();
+        if (inside(pos)) {
+            v = (Vector3D(-(pos.z - center.z), 50 - (pos.y - center.y), pos.x - center.x)) * k;
+            ForceWind::updateForce(p, dt);
+        }
     }
 }

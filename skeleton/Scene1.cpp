@@ -68,6 +68,10 @@ void Scene1::keyPress(unsigned char key, const physx::PxTransform& camera) {
         for (auto* proj : m_projectiles) if (proj) proj->changeMass(50.0f);
         break;
     }
+    case('m'):
+        grav->setActive(!grav->getActive());
+        gravUp->setActive(!gravUp->getActive());
+        break;
     }
 }
 

@@ -19,7 +19,7 @@ public:
     };
 
     ParticleGenerator(float SpawnTime, Vector3D Vel, Vector3D Pos, float LifeTime,
-        TYPE type = POINT, float Spread = 5.3f, float Radius = 1.0f); //variables opcionales para cone.
+        TYPE type = POINT, float Spread = 5.3f, float Radius = 1.0f, float Mass = 1.0f); //variables opcionales .
     ~ParticleGenerator();
 
     void update(double dt);
@@ -40,6 +40,7 @@ private:
     Vector3D vel;
     Vector3D pos;
     float lifeTime;
+    float mass;
 
     TYPE type;
     TYPEDIST typedist;

@@ -40,7 +40,12 @@ void Scene4::update(double dt)
 void Scene4::keyPress(unsigned char key, const physx::PxTransform& camera) {
     switch (key) {
     case('p'):
-        m_ps->addExplGenToAll(Vector3D(-90.0f, 10.0f, -90.0f), 500.0f, 10000.0f, 0.4f);
+        if (active)
+            m_ps->addExplGenToAll(Vector3D(-90.0f, 10.0f, -90.0f), 500.0f, 10000.0f, 0.4f);
+        break;
+    case('m'):
+        m_ps->toogleForces();
+        active = !active;
         break;
     }
 }

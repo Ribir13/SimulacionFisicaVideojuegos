@@ -13,9 +13,11 @@ bool ForceWind::inside(Vector3D pos)
 
 void ForceWind::updateForce(Particle* p, double dt)
 {
-    Vector3D pos = p->getPosition();
-    if (inside(pos)){
-        Vector3D force = (v - p->getVelocity()) * k1 + (v - p->getVelocity()) * (v- p->getVelocity()).magnitude() * k2;
-        p->addForce(force);
+    if (active) {
+        Vector3D pos = p->getPosition();
+        if (inside(pos)) {
+            Vector3D force = (v - p->getVelocity()) * k1 + (v - p->getVelocity()) * (v - p->getVelocity()).magnitude() * k2;
+            p->addForce(force);
+        }
     }
 }

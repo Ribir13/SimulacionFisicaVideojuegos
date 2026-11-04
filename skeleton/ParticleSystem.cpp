@@ -39,8 +39,8 @@ void ParticleSystem::update(double dt) {
 }
 
 ParticleGenerator* ParticleSystem::addGen(float SpawnTime, Vector3D Vel, Vector3D Pos, float LifeTime,
-    ParticleGenerator::TYPE type, float Spread, float Radius) {
-    ParticleGenerator* pg = new ParticleGenerator(SpawnTime, Vel, Pos, LifeTime, type, Spread, Radius);
+    ParticleGenerator::TYPE type, float Spread, float Radius, float Mass) {
+    ParticleGenerator* pg = new ParticleGenerator(SpawnTime, Vel, Pos, LifeTime, type, Spread, Radius, Mass);
 
     partGens.push_back(pg);
     return pg;
@@ -84,5 +84,11 @@ void ParticleSystem::addExplGenToAll(Vector3D Center, float R, float K, float Du
     forceGens.push_back(ft);
     for (auto it = partGens.begin(); it != partGens.end(); it++) {
         (*it)->addForceGenerator(ft);
+    }
+}
+
+void ParticleSystem::toogleForces() {
+    for (ForceGenerator* fg : forceGens) {
+        fg->setActive(!fg->getActive());
     }
 }

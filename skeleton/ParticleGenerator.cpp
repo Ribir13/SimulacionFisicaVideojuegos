@@ -4,8 +4,8 @@
 #include <iostream>
 
 ParticleGenerator::ParticleGenerator(float SpawnTime, Vector3D Vel, Vector3D Pos, float LifeTime,
-    TYPE type, float Spread, float Radius) :
-    spawnTime(SpawnTime), vel(Vel), pos(Pos), lifeTime(LifeTime),
+    TYPE type, float Spread, float Radius, float Mass) : 
+    spawnTime(SpawnTime), vel(Vel), pos(Pos), lifeTime(LifeTime), mass(Mass),
      type(type), spread(Spread), radius(Radius), m_engine(std::random_device{}()), uniformDist(-1.0f, 1.0f), gaussDist(0.0f, 1.0f) {
     typedist = TYPEDIST::GAUSS;
     scaling = false;
@@ -77,7 +77,7 @@ void ParticleGenerator::newParticle() {
         theColor.w = 1.0f;
     }
 
-    Particle* p = new Particle(1.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime, shape, theColor, scale);
+    Particle* p = new Particle(mass, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime, shape, theColor, scale);
     particles.push_back(p);
 }
 
