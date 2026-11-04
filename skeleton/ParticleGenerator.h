@@ -29,6 +29,8 @@ public:
     void integrateParticles(double dt);
 
     void custom(Particle::ParticleShape Shape, Vector4 Color, float Scale = 2.0f);
+    void setScaling(bool s) { scaling = s; }
+
 private:
     std::vector<Particle*> particles;
 
@@ -41,6 +43,8 @@ private:
     TYPEDIST typedist;
     float spread;
     float radius;
+
+    bool scaling;
 
     float timer = 0.0f;
 

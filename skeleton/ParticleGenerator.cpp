@@ -8,6 +8,7 @@ ParticleGenerator::ParticleGenerator(float SpawnTime, Vector3D Vel, Vector3D Pos
     spawnTime(SpawnTime), vel(Vel), pos(Pos), lifeTime(LifeTime),
      type(type), spread(Spread), radius(Radius), m_engine(std::random_device{}()), uniformDist(-1.0f, 1.0f), gaussDist(0.0f, 1.0f) {
     typedist = TYPEDIST::GAUSS;
+    scaling = false;
 }
 
 ParticleGenerator::~ParticleGenerator() {
@@ -42,6 +43,9 @@ void ParticleGenerator::update(double dt) {
         }
         else {
             ++it;
+        }
+        if (scaling) {
+            p->updateScale();
         }
     }
 }

@@ -9,6 +9,8 @@ Particle::Particle(float Mass, Vector3D Pos, Vector3D Vel, Vector3D Acc, float D
     acc = Acc;
     damp = Damp;
     timeToLive = Time;
+    iniTimeToLive = Time;
+    iniScale = Scale;
 
     physx::PxShape* shape;
 
@@ -20,6 +22,7 @@ Particle::Particle(float Mass, Vector3D Pos, Vector3D Vel, Vector3D Acc, float D
     }
 
     renderItem = new RenderItem(shape, &pose, Color);
+    renderItem->scale = Scale;
 }
 
 Particle::~Particle() {
@@ -84,4 +87,10 @@ void Particle::custom(ParticleShape ps, Vector4 Color, float Scale)
     renderItem->shape->release();
     renderItem->shape = shape;
     renderItem->color = Color;
+}
+
+void Particle::updateScale() {
+    if (!isDead()) {
+        renderItem->scale = iniScale * (timeToLive / iniTimeToLive);
+    }
 }

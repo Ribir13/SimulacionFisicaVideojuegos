@@ -28,6 +28,8 @@ public:
 	Vector3D getPosition() { return Vector3D(pose.p); }
 	Vector3D getVelocity() { return vel; }
 
+	void updateScale();
+
 protected:
 	float mass;
 	Vector3D acc;
@@ -42,6 +44,7 @@ protected:
 
 	float timeToLive;
 
-	float spawnAccumulator = 0.0f;
+	float iniScale;
+	float iniTimeToLive;
 };
 
