@@ -6,6 +6,7 @@ public:
     ForceExplosion(Vector3D Center, float R, float K, float Dur);
     void updateForce(Particle* p, double dt) override;
     void update(double dt) override;
+    bool isFinished() override { return t >= dur; };
 private:
     Vector3D center;
     float radius, k, dur;

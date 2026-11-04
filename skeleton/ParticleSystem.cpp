@@ -19,8 +19,18 @@ ParticleSystem::~ParticleSystem() {
 }
 
 void ParticleSystem::update(double dt) {
-    for (auto it = forceGens.begin(); it != forceGens.end(); ++it) {
+    for (auto it = forceGens.begin(); it != forceGens.end();) {
         (*it)->update(dt);
+        if ((*it)->isFinished()) {
+            for (ParticleGenerator* pg : partGens) {
+                pg->removeFG(*it);
+            }
+            delete* it;
+            it = forceGens.erase(it);
+        }
+        else {
+            ++it;
+        }
     }
     for (auto it = partGens.begin(); it != partGens.end(); ++it) {
         ParticleGenerator* p = *it;

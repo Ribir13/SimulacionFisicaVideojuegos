@@ -9,6 +9,7 @@ ParticleGenerator::ParticleGenerator(float SpawnTime, Vector3D Vel, Vector3D Pos
      type(type), spread(Spread), radius(Radius), m_engine(std::random_device{}()), uniformDist(-1.0f, 1.0f), gaussDist(0.0f, 1.0f) {
     typedist = TYPEDIST::GAUSS;
     scaling = false;
+    randColor = false;
 }
 
 ParticleGenerator::~ParticleGenerator() {
@@ -68,7 +69,15 @@ void ParticleGenerator::newParticle() {
         break;
     }
 
-    Particle* p = new Particle(1.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime, shape, color, scale);
+    Vector4 theColor = color;
+    if (randColor) {
+        theColor.x = randVal(0.0f, 1.0f);
+        theColor.y = randVal(0.0f, 1.0f);
+        theColor.z = randVal(0.0f, 1.0f);
+        theColor.w = 1.0f;
+    }
+
+    Particle* p = new Particle(1.0f, pPos, pVel, Vector3D(0.0f, 0.0f, 0.0f), 0.98f, lifeTime, shape, theColor, scale);
     particles.push_back(p);
 }
 
@@ -87,4 +96,11 @@ void ParticleGenerator::custom(Particle::ParticleShape Shape, Vector4 Color, flo
     shape = Shape;
     color = Color;
     scale = Scale;
+}
+
+void ParticleGenerator::removeFG(ForceGenerator* fg) {
+    auto it = std::find(forceGens.begin(), forceGens.end(), fg);
+    if (it != forceGens.end()) {
+        forceGens.erase(it);
+    }
 }

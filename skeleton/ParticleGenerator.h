@@ -30,7 +30,9 @@ public:
 
     void custom(Particle::ParticleShape Shape, Vector4 Color, float Scale = 2.0f);
     void setScaling(bool s) { scaling = s; }
+    void setRandColor(bool s) { randColor = s; }
 
+    void removeFG(ForceGenerator* fg);
 private:
     std::vector<Particle*> particles;
 
@@ -45,6 +47,7 @@ private:
     float radius;
 
     bool scaling;
+    bool randColor;
 
     float timer = 0.0f;
 
