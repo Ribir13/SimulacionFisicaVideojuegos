@@ -87,6 +87,15 @@ void ParticleSystem::addExplGenToAll(Vector3D Center, float R, float K, float Du
     }
 }
 
+void ParticleSystem::addSpringGenBetweenTwo(double k, double resting_length, Particle* first, Particle* second)
+{
+    SpringForceGenerator* ft = new SpringForceGenerator(k, resting_length, first);
+    forceGens.push_back(ft);
+    for (auto it = partGens.begin(); it != partGens.end(); it++) {
+        (*it)->addForceGenerator(ft);
+    }
+}
+
 void ParticleSystem::toogleForces() {
     for (ForceGenerator* fg : forceGens) {
         fg->setActive(!fg->getActive());
